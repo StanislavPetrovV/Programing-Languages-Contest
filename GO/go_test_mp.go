@@ -3,10 +3,14 @@ package main
 import (
 	"fmt"
 	"math"
+	"sync"
 	"time"
 )
 
+var wg = &sync.WaitGroup{}
+
 func isPrime(num int) bool {
+	defer wg.Done()
 	if num == 2 {
 		return true
 	}
@@ -24,10 +28,11 @@ func isPrime(num int) bool {
 
 func main() {
 	N := 10000000
+	wg.Add(N)
 	start := time.Now()
 	for i := 0; i < N; i++ {
 		go isPrime(i)
 	}
+	wg.Wait()
 	fmt.Println(time.Since(start))
-	fmt.Scanln()
 }
