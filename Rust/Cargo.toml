@@ -1,0 +1,17 @@
+[package]
+name = "is_prime"
+version = "0.1.0"
+authors = ["RemiIia <valent.xarin@gmail.com>"]
+edition = "2018"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
+
+[dependencies]
+rayon = "1.5.0"
+
+
