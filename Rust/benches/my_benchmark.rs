@@ -26,6 +26,7 @@ fn is_prime_bench(c: &mut Criterion) {
         b.iter(|| {
             (0..N).into_par_iter().for_each(|x| {
                 is_prime(x as f32);
+                print!("");
             })
         })
     });
