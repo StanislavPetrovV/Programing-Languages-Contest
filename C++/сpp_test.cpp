@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cmath>
-#include <time.h>
+#include <сtime>
 
 using namespace std;
 
-bool isPrime(int num)
+inline bool isPrime(int num)
 {
     if (num == 2) return true;
     if (num <= 1 || num % 2 == 0) return false;
