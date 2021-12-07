@@ -7,10 +7,7 @@ import (
 	"time"
 )
 
-var wg = &sync.WaitGroup{}
-
 func isPrime(num int) bool {
-	defer wg.Done()
 	if num == 2 {
 		return true
 	}
@@ -26,12 +23,25 @@ func isPrime(num int) bool {
 
 }
 
+const threads = 4
+const n = 10000000
+const nByThread = n / threads
+
+func worker(id int, wg *sync.WaitGroup) {
+	start := id * nByThread
+	end := start + nByThread
+	for i := start; i < end; i++ {
+		isPrime(i)
+	}
+	wg.Done()
+}
+
 func main() {
-	N := 10000000
-	wg.Add(N)
+	wg := sync.WaitGroup{}
+	wg.Add(threads)
 	start := time.Now()
-	for i := 0; i < N; i++ {
-		go isPrime(i)
+	for i := 0; i < threads; i++ {
+		go worker(i, &wg)
 	}
 	wg.Wait()
 	fmt.Println(time.Since(start))
