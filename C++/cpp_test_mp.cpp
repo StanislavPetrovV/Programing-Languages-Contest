@@ -42,7 +42,7 @@ threads[3].join();
 auto end = std::chrono::high_resolution_clock::now();
 std::chrono::duration<double> elapsedTime = end - start;
 
-std::cout << "Total time: " << std::to_string(elapsedTime.count()) << " seconds.";
+printf("Total time: %f%s", (elapsedTime.count()), " seconds.");
 // scanf_s("%i", &n);
 return 0;
 }
