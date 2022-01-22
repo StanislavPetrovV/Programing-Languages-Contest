@@ -2,6 +2,7 @@
 #include <cmath>
 #include <time.h>
 #include <thread>
+#include <chrono>
 
 bool isPrime(int num)
 {
@@ -31,16 +32,17 @@ std::thread(start_multithreading, n, 3)
 
 
 
-clock_t start, end;
-start = clock();
+auto start = std::chrono::high_resolution_clock::now();
 
 threads[0].join();
 threads[1].join();
 threads[2].join();
 threads[3].join();
 
-end = clock();
-printf("time: %f", (end - start) / ((double)CLOCKS_PER_SEC));
+auto end = std::chrono::high_resolution_clock::now();
+std::chrono::duration<double> elapsedTime = end - start;
+
+printf("Total time: %f%s", (elapsedTime.count()), " seconds.");
 // scanf_s("%i", &n);
 return 0;
 }
